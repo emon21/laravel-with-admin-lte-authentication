@@ -73,6 +73,11 @@ class AdminController extends Controller
 
         ]);
 
+        // $rulse=[
+        //     'old_password' => "required",
+        //     'new_password' => "required",
+        // ];
+        // $this->validate($req,$rulse);
           $req->validate([
             'old_password' => "required",
             'new_password' => "required",

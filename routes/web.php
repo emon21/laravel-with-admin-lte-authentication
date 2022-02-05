@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use Carbon\Carbon;
+use App\Http\Controllers\StudentController;
 
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,9 @@ Route::get('admin/profile/change/{userid}', [AdminController::class, 'profilecha
   
 Route::post('admin/profile/changeprofile',[AdminController::class,'changeprofile']);
 
-
+//Student 
+Route::get('admin/student/create',[StudentController::class,'index']);
+Route::post('admin/student/insert',[StudentController::class,'create']);
 
 
 
