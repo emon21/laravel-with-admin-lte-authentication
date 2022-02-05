@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use Carbon\Carbon;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +23,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/login', [AdminController::class, 'index']);
+Route::get('/register', [AdminController::class, 'register']);
+Route::get('/admin/profile', [AdminController::class, 'profile']);
+Route::get('admin/profile/change/{userid}', [AdminController::class, 'profilechange']);
+  
+Route::post('admin/profile/changeprofile',[AdminController::class,'changeprofile']);
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

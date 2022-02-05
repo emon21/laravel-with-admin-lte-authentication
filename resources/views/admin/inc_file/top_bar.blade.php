@@ -146,7 +146,7 @@
                       </p>
                     </li>
                     <!-- Menu Body -->
-                    <li class="user-body ml-2">
+                    {{-- <li class="user-body ml-2">
                       <div class="row">
                         <div class="col-xs-4 pr-4 text-center">
                           <a href="#">Followers</a>
@@ -159,11 +159,11 @@
                         </div>
                       </div>
                       <!-- /.row -->
-                    </li>
+                    </li> --}}
                     <!-- Menu Footer-->
                     <li class="user-footer">
                       <div class="float-left">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        <a href="{{ url('admin/profile') }}" class="btn btn-outline-success btn-flat">Profile</a>
                       </div>
                       <div class="float-right">
                         {{-- <a href="#" class="btn btn-outline-danger text-white btn-flat">Sign out</a> --}}
