@@ -11,52 +11,53 @@
       <form action="{{ url('register') }}" method="post">
       @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Full name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-           @error('name')
-        <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+          <input type="text" class="form-control" placeholder="Full name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
+         @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+         @enderror
+       
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email"  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-            @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-          <div class="input-group-append">
+          <input type="text" class="form-control" placeholder="Enter Your Email...!!" class="form-control @error('name') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
+           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
+         @error('email')
+             <div class="alert alert-danger">{{ $message }}</div>
+         @enderror
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password"  @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-           @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+          <input type="password" class="form-control" placeholder="Your Password...!!" class="form-control @error('name') is-invalid @enderror" name="password" value="{{ old('password') }}" autocomplete="password" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+         @error('password')
+             <div class="alert alert-danger">{{ $message }}</div>
+         @enderror
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password" name="password_confirmation" required autocomplete="new-password">
-          <div class="input-group-append">
+          <input type="password" class="form-control" placeholder="Retype password" name="password_confirmation" value="{{ old('password_confirmation') }}"   autocomplete="password_confirmation" autofocus>
+           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+        @error('password_confirmation')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">

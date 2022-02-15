@@ -1,12 +1,11 @@
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
+<!-- Main Footer -->
+<footer class="main-footer">
     <strong>Copyright &copy; @php echo date('Y') @endphp <a href="#">Developer Hasib</a>.</strong>
     All rights reserved.
     {{-- <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0
     </div> --}}
-  </footer>
+</footer>
 </div>
 <!-- ./wrapper -->
 
@@ -28,10 +27,53 @@
 <script src="{{ asset('admin') }}/plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
 <script src="{{ asset('admin') }}/plugins/chart.js/Chart.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('admin') }}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/jszip/jszip.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="{{ asset('admin') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('admin') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script>
+    $(function() {
+        $("#example1").DataTable({
+            "ordering": true,
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": true,
 
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        });
+    });
+</script>
+
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin') }}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('admin') }}/dist/js/pages/dashboard2.js"></script>
 </body>
+
 </html>

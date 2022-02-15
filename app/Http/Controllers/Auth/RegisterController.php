@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use auth;
 class RegisterController extends Controller
 {
     /*
@@ -30,7 +30,18 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    
+    
+    // protected function redirectTo(){
+    //     if (Auth()->user()->role_id ==1) {
+    //         return redirect()->route('admin/dashboard');
+    //     }
 
+    //      elseif (Auth()->user()->role_id ==2) {
+    //         return redirect()->route('user/dashboard');
+    //     }
+
+    // }
     /**
      * Create a new controller instance.
      *
@@ -68,6 +79,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'user_picture' => 'profile/default.jpg',
+            
         ]);
     }
 }

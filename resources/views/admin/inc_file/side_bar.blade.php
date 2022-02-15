@@ -59,12 +59,12 @@
               <p>
                 Student 
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
+                <span class="badge badge-info right">2</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{  url('admin/student/create') }}" class="nav-link">
+                <a href="{{  url('admin/student/studentlist') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Student List</p>
                 </a>

@@ -33,14 +33,15 @@
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror --}}
 
-                                <form action="{{ url('admin/student/insert') }}" method="post"
+                                <form action="{{ url('admin/student/studentupdate') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
+                                    <input type="hidden" value="{{ $data->id }}" name="student_id">
                                     <ul class="list-group list-group-unbordered  bg-danger mb-3 w-50 mx-auto">
                                         <li class="list-group-item bg-white">
                                             <b>Student Name</b><input type="text"
                                                 class="bg-white form-control col-sm-12 mt-2" id="usr" name="student_name"
-                                                placeholder="Enter Student Name...!!">
+                                                placeholder="Enter Student Name...!!" value="{{ $data->name }}">
                                             @error('student_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -48,70 +49,31 @@
                                         <li class="list-group-item bg-white">
                                             <b>Email Address </b><input type="text"
                                                 class="bg-white form-control col-sm- mt-2" id="usr" name="student_email"
-                                                placeholder="Enter email...!!" value="">
+                                                placeholder="Enter email...!!" value="{{ $data->email }}">
                                             @error('student_email')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </li>
                                         <li class="list-group-item bg-white">
-                                            <b>Password</b><input type="password"
-                                                class="bg-white form-control col-sm-12 mt-2" id="usr"
-                                                name="student_password" placeholder="Password...!!">
+                                            <b>Password</b><input type="text" class="bg-white form-control col-sm-12 mt-2"
+                                                id="usr" name="student_password" placeholder="Password...!!"
+                                                value="{{ $data->password }}">
                                             @error('student_password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </li>
-
+                                        <img src="{{ asset('storage/student') }}/{{ $data->std_picture }}" width="250"
+                                            height="250" class="mt-3 mb-3 d-block mx-auto bg-light">
                                         <li class="list-group-item bg-white">
-                                            <b>Student Picture</b>
-                                            <div class="custom-file mt-1">
-                                                <input type="file" class="custom-file-input mt-2" id="customFile"
-                                                    name="student_picture">
-
-                                                @error('student_picture')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                            </div>
-                                        </li>
-
-
-                                        <li class="list-group-item bg-white">
-                                            <b>Student Phone No :</b>
-                                            <div class="mt-1">
-                                                <input type="number" class="form-control mt-2" name="student_phone">
-
-                                                @error('student_phone')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </li>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="switch1">
-                                            <label class="custom-control-label" for="switch1">Toggle me</label>
-                                        </div>
-
-
-
-                                        <li class="list-group-item bg-white">
-                                            <b>Gender :</b>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" class="custom-control-input" id="customRadio" name="sex"
-                                                    value="male">
-                                                <label class="custom-control-label" for="customRadio">Male</label>
-                                            </div>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" class="custom-control-input" id="customRadio2"
-                                                    name="sex" value="female">
-                                                <label class="custom-control-label" for="customRadio2">Female</label>
-                                            </div>
-                                            @error('sex')
+                                            <label class="custom-file-label" for="customFile">Student Picture</label>
+                                            <input type="file" class="custom-file-input bg- mt-2" name="student_picture"
+                                                id="customFile" value="{{ $data->name }}">
+                                            @error('student_picture')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </li>
-
                                     </ul>
-                                    <button type="submit" class="btn btn-outline-success btn-block mb-3 w-25 mx-auto">Add
+                                    <button type="submit" class="btn btn-outline-success btn-block mb-3 w-25 mx-auto">Update
                                         Student</button>
                                 </form>
 
