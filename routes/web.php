@@ -32,19 +32,21 @@ Auth::routes(['verify'=>true]);
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
 //Admin Auth
-Route::get('/login', [AdminController::class, 'index']);
-Route::get('/register', [AdminController::class, 'register']);
+// Route::get('/login', [AdminController::class, 'index'])->name('login');
+// Route::get('/register', [AdminController::class, 'register']);
 
 //Route::get('/admin/home', [AdminController::class, 'adminhome'])->name('admin.dashboard')->middleware('admin');
 
+
 Route:: group(['prefix' => 'admin', 'middleware' => ['admin','auth'],'namespech' => 'admin'],function(){
    
-    Route::get('admin.dashboard',[AdminController::class,'adminindex'])->name('admin.dashboard');
+    Route::get('dashboard',[AdminController::class,'adminindex'])->name('admin.dashboard');
 });
+
 
 Route:: group(['prefix' => 'user', 'middleware' => ['user','auth'],'namespech' => 'user'],function(){
    
-    Route::get('user.dashboard',[UserController::class,'index'])->name('user.dashboard');
+    Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
 });
 
 

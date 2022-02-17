@@ -168,7 +168,13 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <div class="float-left">
-                        <a href="{{ url('admin/profile') }}" class="btn btn-outline-success btn-flat">Profile</a>
+                        @if(Auth::user()->role_id == 1)
+                            {{--  {{ auth::user()->name }}  --}}
+                        <a href="{{ url('admin/profile') }}" class="btn btn-outline-success btn-flat">Admin Profile</a>
+@elseif(Auth::user()->role_id == 2)
+                        <a href="{{ url('user/profile') }}" class="btn btn-outline-success btn-flat">User Profile</a>
+
+                        @endif
                     </div>
                     <div class="float-right">
                         {{-- <a href="#" class="btn btn-outline-danger text-white btn-flat">Sign out</a> --}}
