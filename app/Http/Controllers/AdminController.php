@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Product;
 use Illuminate\Support\Str;
 
 use Auth;
@@ -19,7 +20,14 @@ class AdminController extends Controller
    public function adminindex()
     {
         return view('admin.admin_home');
-        
+
+    }
+
+    //Product
+    public function product()
+    {
+        $products = Product::all();
+        return view('admin/product/productlist',compact('products'));
     }
     //model binding
     public function group(Student $id)
@@ -27,45 +35,43 @@ class AdminController extends Controller
         return $id;
     }
 
-    //Accessor 
-public function show()
-{
-    // return Student::all();
-    // return Student::find($value);
-    
-     $pro = Student::all();
-     return $pro;
-    
-}
+    //Accessor
+    public function show()
+    {
+        // return Student::all();
+        // return Student::find($value);
 
+        $pro = Student::all();
+        return $pro;
 
+    }
     public function student(Student $student)
     {
         // return Student::all();
     //    $user = Student::find(1);
-       
+
     //   return $user->name();
 
       $student = new Student();
-      $student->name ='emon';
+      $student->name;
       $student->email ='emon@mail2233.com';
-      $student->password;
+      $student->designation = 'Programmer';
       $student->phone ='12345678902';
       $student->save();
-      
+
     }
-    
+
     public function index()
     {
-          // $uid  = Auth::user()->id;    
+          // $uid  = Auth::user()->id;
         // $req->validate([
         //     'email' => 'required|email',
         //     'password' => 'required|min:8',
-        // ]);   
+        // ]);
         return view('admin/login');
 
-       
-        
+
+
     }
 
      public function register()
@@ -78,22 +84,22 @@ public function show()
         $user=  auth::user()->id;
         $list = User::find($user);
         return view('admin/profile/userprofile',compact('list'));
-       
+
         // if{Auth::check()->}
         // $list = User::find($user);
 
     }
     public function changeprofile($userid)
-    {   
-    
+    {
+
         $userlist = User::find($userid);
         return view('admin/profile/changeuser',compact('userlist'));
-        
+
     }
     public function updateprofile(Request $req,User $user)
     {
 
-     
+
        $userid = $req->userid;
      //  $userlist = User::find($userid);
 
@@ -102,7 +108,7 @@ public function show()
       // return $userlist;
 
         if($req->hasFile('user_picture')){
-           
+
         //     $sid = Student::find($std_id);
         // $destanation ='storage/student/'.$sid->std_picture;
         //     // $img->move('storage/service/',$service_id);
@@ -117,29 +123,29 @@ public function show()
      File::delete($location);
             }
 
-            
+
             $img = $req->file('user_picture');
             $extension = $img->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $img->move('storage/profile',$filename); 
+            $img->move('storage/profile',$filename);
             User::where('id',$userid)->update([
                         'user_picture' =>$filename,
                         'updated_at' => Carbon::now()
                         ]);
-        
 
-         
+
+
                   return redirect('admin/profile/');
-                        
+
                     }
 
 
                     elseif($req->hasFile('user_picture')){
-                        
+
                            $img = $req->file('user_picture');
             $extension = $img->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $img->move('storage/profile',$filename); 
+            $img->move('storage/profile',$filename);
             User::where('id',$userid)->update([
                        'name'=>$req->user_name,
                      //   'email'=>$req->user_email,
@@ -176,7 +182,7 @@ public function show()
 
         // ]);
 
-        
+
 
         // if(Hash::check($req->old_password,Auth::user()->password)){
         // User::find(Auth::user()->id)->update([
@@ -188,41 +194,41 @@ public function show()
         //     return back()->withErrors("Your Old Password dosn`T Match Our Record!");
         // }
 
-    
 
 
-     
-        
 
-      
+
+
+
+
 
 
     }
 
     public function changepassword(Request $req)
     {
-     
-        // $uid  = Auth::user()->id;    
+
+        // $uid  = Auth::user()->id;
         $req->validate([
             'old_password' => 'required',
             'new_password' => 'required|min:8',
         ]);
 
         if (Hash::check($req->old_password, Auth::user()->password)) {
-            
+
             User::find(Auth::user()->id)->update([
-               'password' => bcrypt($req->new_password), 
+               'password' => bcrypt($req->new_password),
             ]);
             return back()->with('status','password has been cheanged...!!');
-            
+
         }
         else{
-            
+
             return back()->withErrors('Your Old Password does Not Match With Our Records...!!');
-            
+
         }
-       
+
         // return all();
-         
+
     }
 }

@@ -39,10 +39,10 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-               
+
               </p>
             </a>
-           
+
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -57,7 +57,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
               <p>
-                Student 
+                Student
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">2</span>
               </p>
@@ -71,8 +71,27 @@
               </li>
             </ul>
           </li>
-         
-            
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-list"></i>
+              <p>
+                Product
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{  url('admin/product/productlist') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Product List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
       </nav>
       <!-- /.sidebar-menu -->
     </div>

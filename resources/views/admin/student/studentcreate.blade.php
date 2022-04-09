@@ -54,9 +54,9 @@
                                             @enderror
                                         </li>
                                         <li class="list-group-item bg-white">
-                                            <b>Password</b><input type="password"
+                                            <b>designation</b><input type="text"
                                                 class="bg-white form-control col-sm-12 mt-2" id="usr"
-                                                name="student_password" placeholder="Password...!!">
+                                                name="designation" placeholder="Password...!!">
                                             @error('student_password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

@@ -134,9 +134,9 @@
       </li> -->
         <li class="dropdown user user-menu ml-2 pt-2 text-white">
             <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset('storage/profile') }}/{{ auth::user()->user_picture }}" class="user-image"
+                <img src="{{ asset('storage/profile') }}/{{ Auth::user()->user_picture }}" class="user-image"
                     alt="User Image">
-                <span class="hidden-xs text-white">Hi , {{ auth::user()->name }}</span>
+                <span class="hidden-xs text-white">Hi , {{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu pt-4 bg-info mt-2">
                 <!-- User image -->

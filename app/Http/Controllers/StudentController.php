@@ -19,10 +19,10 @@ class StudentController extends Controller
     public function index()
     {
         $studentlist = Student::all();
-       
-       
+
+
         return view('admin/student/studentlist',compact('studentlist'));
-        
+
     }
 
     /**
@@ -33,9 +33,9 @@ class StudentController extends Controller
     public function create(Request $req)
     {
         //
-        
+
         return view('admin/student/studentcreate');
-       
+
     }
 
     /**
@@ -49,7 +49,7 @@ class StudentController extends Controller
          $rulse=[
             'student_name' => "required",
             'student_email' => "required|email",
-            'student_password' => "required",
+            'designation' => "required",
             'student_picture' => "required",
             'student_phone' => "numeric|min:11",
 
@@ -58,11 +58,11 @@ class StudentController extends Controller
             'student_name.required' => "Student Name is Not Empty",
             'student_email.required' => "Email Must be valid Mail",
             'student_email.email' => "Email Must be valid Mail",
-            'student_password.required' => "Password is Not Empty",
+            'designation.required' => "Designation is Not Empty",
              'student_picture.required' => "Picture is Not Empty",
             'student_phone.numeric' => "Only Number Allow",
-            
-             
+
+
         ];
         $this->validate($req,$rulse,$cm);
 
@@ -71,12 +71,12 @@ class StudentController extends Controller
             $img = $req->file('student_picture');
             $extension = $img->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $img->move('storage/student',$filename); 
-            
+            $img->move('storage/student',$filename);
+
             Student::insert([
-            'name' =>$req->student_name,
+            'name' => $req->student_name,
             'email' =>$req->student_email,
-            'password' =>$req->student_password,
+            'designation' =>$req->designation,
             'phone' =>$req->student_phone,
             'std_picture' =>$filename,
             'gender' =>$req->sex,
@@ -101,9 +101,9 @@ class StudentController extends Controller
 
                return redirect('admin/student/studentlist')->with('status',"Student Information Successfully Inserted...!!");
         }
-       
-        
-      
+
+
+
     }
 
     /**
@@ -115,7 +115,7 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         //
-    
+
         $studentlist = Student::find($student);
         // return $studentlist;
         return view('admin/student/studentshow',compact('studentlist'));
@@ -142,10 +142,10 @@ class StudentController extends Controller
      */
     public function update(Request $req, Student $student)
     {
-        
+
         $std_id = $req->student_id;
        if($req->hasFile('student_picture')){
-           
+
             $student = Student::find($std_id);
             $location ='storage/student/'.$student->std_picture;
                 // $img->move('storage/service/',$service_id);
@@ -153,11 +153,11 @@ class StudentController extends Controller
                unlink($location);
               // File::delete($location);
             }
-            
+
                        $img = $req->file('student_picture');
                        $extension = $img->getClientOriginalExtension();
                        $filename = time().'.'.$extension;
-                       $img->move('storage/student',$filename); 
+                       $img->move('storage/student',$filename);
                        Student::where('id',$std_id)->update([
                         'name' =>$req->student_name,
                         'email' =>$req->student_email,
@@ -165,7 +165,7 @@ class StudentController extends Controller
                         'updated_at' => Carbon::now()
                         ]);
                     }
-      
+
         else{
                         Student::where('id',$std_id)->update([
                         'name' =>$req->student_name,
@@ -173,7 +173,7 @@ class StudentController extends Controller
                         'updated_at' => Carbon::now()
                         ]);
         }
-       
+
             return redirect('admin/student/studentlist');
     }
 
@@ -185,7 +185,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student,$student_id)
     {
-        
+
           $student = Student::find($student_id);
 
     //   $img = $student->std_picture;
@@ -198,8 +198,8 @@ class StudentController extends Controller
             }
 
          // $student->delete();
-  
-      
+
+
       Student::destroy($student_id);
          return back();
     }
@@ -211,12 +211,12 @@ class StudentController extends Controller
 
         // $student ->status = $req->studentstatus;
         // $student->save();
-    
+
         if($student->status == '1'){
             $status = 0;
         }
         else{
-            $status =1; 
+            $status =1;
         }
 
          Student::where('id',$studentstatus)->update([

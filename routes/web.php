@@ -27,7 +27,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify'=>true]);
+//Auth::routes(['verify'=>true]);
+Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
@@ -39,13 +40,13 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 
 
 Route:: group(['prefix' => 'admin', 'middleware' => ['admin','auth'],'namespech' => 'admin'],function(){
-   
+
     Route::get('dashboard',[AdminController::class,'adminindex'])->name('admin.dashboard');
 });
 
 
 Route:: group(['prefix' => 'user', 'middleware' => ['user','auth'],'namespech' => 'user'],function(){
-   
+
     Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
 });
 
@@ -56,7 +57,7 @@ Route:: group(['prefix' => 'user', 'middleware' => ['user','auth'],'namespech' =
 
 // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
 //     $request->fulfill();
- 
+
 //     return redirect('/home');
 // })->middleware(['auth', 'signed'])->name('verification.verify');
 
@@ -68,7 +69,7 @@ Route:: group(['prefix' => 'user', 'middleware' => ['user','auth'],'namespech' =
 
 // Route::group(['prifix' =>'admin','middleware' =>'auth'],function()
 // {
-    
+
 //      Route::get('/dashboard', function () {
 //         // Matches The "/admin/users" URL
 //         return "Admin";
@@ -94,6 +95,10 @@ Route::get('admin/student/studentdelete/{student_id}',[StudentController::class,
 Route::get('admin/student/studentstatus/{student_status}',[StudentController::class,'studentstatus']);
 
 
+//Product
+Route::get('admin/product/productlist',[AdminController::class,'product']);
+
+
 //Model binding route
 Route::get('admin/group/{id}',[AdminController::class,'group']);
 
@@ -105,15 +110,15 @@ Route::get('admin/student/',[AdminController::class,'student']);
 
 ///Frontend Route
 Route::get('/',[WebsiteController::class,'index']);
-
+Route::post('/search',[WebsiteController::class,'search']);
 
 // Email Notification
 
-Route::get('/emailsend',function(){
-    
-    $user = User::find(1);
-    $user->notify(new EmailNotification());
-});
+// Route::get('/emailsend',function(){
+
+//     $user = User::find(1);
+//     $user->notify(new EmailNotification());
+// });
 
 // Website Route
 
