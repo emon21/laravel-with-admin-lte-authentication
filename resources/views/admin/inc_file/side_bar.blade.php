@@ -35,7 +35,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="{{ route('home') }}" class="nav-link active">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -72,13 +72,34 @@
             </ul>
           </li>
 
+          {{-- Category --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-list"></i>
+              <p>
+                Category
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{  url('admin/category/categorytlist') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Category List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+           {{-- Product --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-list"></i>
               <p>
                 Product
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">2</span>
+                <span class="badge badge-info right">{{ $count }}</span>
               </p>
             </a>
             <ul class="nav nav-treeview">

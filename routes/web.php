@@ -30,7 +30,8 @@ Route::get('/', function () {
 //Auth::routes(['verify'=>true]);
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/admin/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //Admin Auth
 // Route::get('/login', [AdminController::class, 'index'])->name('login');
@@ -43,7 +44,6 @@ Route:: group(['prefix' => 'admin', 'middleware' => ['admin','auth'],'namespech'
 
     Route::get('dashboard',[AdminController::class,'adminindex'])->name('admin.dashboard');
 });
-
 
 Route:: group(['prefix' => 'user', 'middleware' => ['user','auth'],'namespech' => 'user'],function(){
 
@@ -95,8 +95,14 @@ Route::get('admin/student/studentdelete/{student_id}',[StudentController::class,
 Route::get('admin/student/studentstatus/{student_status}',[StudentController::class,'studentstatus']);
 
 
+//Category
+Route::get('admin/category/categorytlist',[AdminController::class,'category']);
+Route::get('admin/category/categoryshow/{category}',[AdminController::class,'categoryshow']);
+
 //Product
 Route::get('admin/product/productlist',[AdminController::class,'product']);
+//Product Model Binding Route
+Route::get('admin/product/productshow/{product:slug}',[AdminController::class,'productshow']);
 
 
 //Model binding route

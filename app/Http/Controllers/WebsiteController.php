@@ -13,10 +13,14 @@ class WebsiteController extends Controller
 {
     public function index(Request $request)
     {
+
+
         $search = $request->search;
         $sortby = $request->sortby;
 
         $students = Student::query();
+        //$students = New Student();
+
 
         if ($search) {
             $students->where('name','Like','%'.$search.'%');

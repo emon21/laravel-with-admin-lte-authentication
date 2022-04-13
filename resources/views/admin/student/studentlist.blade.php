@@ -6,14 +6,14 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="card">
-                    <div class="card-header bg-success">
-                        <h3 class="card-title pt-3">Student All Information</h3>
+                    <div class="card-header bg-secondary">
+                        <h3 class="card-title pt-2">Student All Information</h3>
                         <a href="{{ url('admin/student/create') }}" class="btn btn-outline-warning float-right mt-1"
                             style="margin-top:-42px;font-size:16px;">Add Student +</a>
                     </div>
                     <!-- /.card-header -->
                     @if (session('status'))
-                        <div class="alert alert-danger">
+                        <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
@@ -36,32 +36,36 @@
                                 @foreach ($studentlist as $list)
                                     <tr>
                                         <td>{{ $list->id }}</td>
-                                        <td class="text-center">{{ $list->name }}</td>
+                                        <td class="text-center">{{ $list->student_name }}</td>
                                         <td class="text-center">{{ $list->email }}</td>
-                                        <td class="text-center"><img
-                                                src="{{ asset('storage/student') }}/{{ $list->std_picture }}"
+                                        <td class="text-center">{{ $list->created_at }}</td>
+                                        <td class="text-center">{{ $list->updated_at }}</td>
+                                        <td class="text-center">{{ $list->std_picture }}</td>
+                                        <td class="text-center">
+                                            <img
+                                                src="{{ asset($list->std_picture) }}"
                                                 width="150" height="85"></td>
                                         <td class="text-center">
                                              @if($list->status=='1')
                                            <span class="text-success">Active</span>
-                                               
-                                            
+
+
                                             @else
                                            <span class="text-danger">Inactive</span>
-                                            
+
                                             @endif</td>
-                                           
 
 
-                                            
+
+
                                         <td class="text-center">
                                              @if($list->status=='1')
-                                              <a href="{{ url('admin/student/studentstatus',$list->id) }}" class="btn btn-outline-success mr-2">Active</a>
-                                            
-                                            @else
-                                                  <a href="{{ url('admin/student/studentstatus',$list->id) }}" class="btn btn-outline-danger mr-2">Inactive</a>
 
-                                            
+                                              <a href="{{ url('admin/student/studentstatus',$list->id) }}" class="btn btn-outline-danger mr-2">Inactive</a>
+                                            @else
+                                            <a href="{{ url('admin/student/studentstatus',$list->id) }}" class="btn btn-outline-success mr-2">Active</a>
+
+
                                             @endif
                                             <a href="{{ url('admin/student/studentshow', $list->id) }}"
                                                 class="btn btn-outline-warning mr-2">View</a>

@@ -6,7 +6,7 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="card">
-                    <div class="card-header bg-success">
+                    <div class="card-header">
                         <h3 class="card-title pt-3">Product All Information</h3>
                         <a href="{{ url('admin/student/create') }}" class="btn btn-outline-warning float-right mt-1"
                             style="margin-top:-42px;font-size:16px;">Add Student +</a>
@@ -25,7 +25,7 @@
                                 <tr>
                                     <th class="text-center">Sl No</th>
                                     <th class="text-center">Title</th>
-                                    <th class="text-center">Picture</th>
+                                    <th class="text-center">Slug</th>
                                     <th class="text-center">Price</th>
                                     <th class="text-center">Stock</th>
                                     <th class="text-center">Total</th>
@@ -43,6 +43,7 @@
                                         <td class="text-center">{{ $list->price }}</td>
                                         <td class="text-center">{{ $list->stock }}</td>
                                         <td class="text-center">{{ $list->total }}</td>
+                                        <td class="text-center">{{ $list->status }}</td>
 
                                         <td class="text-center">
                                              @if($list->status=='1')
@@ -55,21 +56,27 @@
                                             @endif</td>
 
 
+                                            <td class="text-center">
 
+                                                <img
+                                                src="{{ asset('storage/') }}/{{ $list->image }}"
+                                                width="150" height="85"></td>
 
                                         <td class="text-center">
                                              @if($list->status=='1')
-                                              <a href="{{ url('admin/student/studentstatus',$list->id) }}" class="btn btn-outline-success mr-2">Active</a>
 
+                                              <a href="{{ url('admin/student/studentstatus',$list->id) }}" class="btn btn-outline-danger mr-2">Inactive</a>
                                             @else
-                                                  <a href="{{ url('admin/student/studentstatus',$list->id) }}" class="btn btn-outline-danger mr-2">Inactive</a>
+                                            <a href="{{ url('admin/student/studentstatus',$list->id) }}" class="btn btn-outline-success mr-2">Active</a>
 
 
                                             @endif
-                                            <a href="{{ url('admin/student/studentshow', $list->id) }}"
+                                            <a href="{{ url('admin/product/productshow', $list->slug) }}"
                                                 class="btn btn-outline-warning mr-2">View</a>
+
                                                 <a href="{{ url('admin/student/studentedit', $list->id) }}"
                                                     class="btn btn-outline-success">Edit</a>
+
                                                     <a href="{{ url('admin/student/studentdelete', $list->id) }}"
                                                         class="btn btn-outline-danger ml-2"
                                                         onclick="return confirm('Are You Sure Delete this Item y/n ?')">Delete
@@ -77,17 +84,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th class="text-center">Sl No</th>
-                                    <th class="text-center">Student Name</th>
-                                    <th class="text-center">Student Email</th>
-                                    <th class="text-center">Student Picture</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <!-- /.card-body -->

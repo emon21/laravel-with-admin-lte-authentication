@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Str;
 
@@ -23,11 +24,32 @@ class AdminController extends Controller
 
     }
 
+    //category
+    public function category()
+    {
+        $category = Category::all();
+        return view('admin/category/categorylist',compact('category'));
+    }
+    public function categoryshow(Category $category)
+    {
+        $category = Category::find($category);
+        return view('admin/category/categorylist',compact('category'));
+    }
+
     //Product
     public function product()
     {
         $products = Product::all();
         return view('admin/product/productlist',compact('products'));
+    }
+
+    public function productshow(Product $product)
+    {
+      $products = Product::find($product)->first();
+       // return $product;
+       return view('admin/product/productshow',compact('products'));
+
+
     }
     //model binding
     public function group(Student $id)
@@ -53,12 +75,14 @@ class AdminController extends Controller
     //   return $user->name();
 
       $student = new Student();
-      $student->name;
+      $student->student_name ='emon raj hasib';
       $student->email ='emon@mail2233.com';
       $student->designation = 'Programmer';
       $student->phone ='12345678902';
+      $student->gender ='0';
+      $student->status ='1';
       $student->save();
-
+      return 'Data insert';
     }
 
     public function index()
@@ -120,7 +144,7 @@ class AdminController extends Controller
                 // $img->move('storage/service/',$service_id);
             if ($req->user_picture) {
               //   unlink($location);
-     File::delete($location);
+             File::delete($location);
             }
 
 

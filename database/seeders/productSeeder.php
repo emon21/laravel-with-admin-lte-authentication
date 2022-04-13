@@ -23,7 +23,7 @@ class productSeeder extends Seeder
                 'id' => '1',
                 'title' => $title,
                 'slug' => Str::slug($title),
-                'image' => 'default.png',
+                'image' => 'product/default.jpg',
                 'price' => '1200',
                 'stock' => '120',
                 'total' => '120',
@@ -32,6 +32,6 @@ class productSeeder extends Seeder
         ];
 
         Product::insert($product);
-        Product::factory(1000)->create();
+        //Product::factory(10)->create();
     }
 }

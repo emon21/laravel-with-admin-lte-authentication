@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
-use Auth;
-use FILE;
+use Illuminate\Auth;
+use Illuminate\File;
+// use Auth;
+// use FILE;
 use Hash;
 class StudentController extends Controller
 {
@@ -30,7 +31,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $req)
+    public function create()
     {
         //
 
@@ -46,65 +47,68 @@ class StudentController extends Controller
      */
     public function store(Request $req)
     {
-         $rulse=[
-            'student_name' => "required",
-            'student_email' => "required|email",
-            'designation' => "required",
-            'student_picture' => "required",
-            'student_phone' => "numeric|min:11",
+        //  $rulse=[
+        //     'student_name' => "required",
+        //     'student_email' => "required|email",
+        //     'designation' => "required",
+        //     'student_picture' => "required",
+        //     'student_phone' => "numeric|min:11",
 
-        ];
-        $cm =[
-            'student_name.required' => "Student Name is Not Empty",
-            'student_email.required' => "Email Must be valid Mail",
-            'student_email.email' => "Email Must be valid Mail",
-            'designation.required' => "Designation is Not Empty",
-             'student_picture.required' => "Picture is Not Empty",
-            'student_phone.numeric' => "Only Number Allow",
+        // ];
+        // $cm =[
+        //     'student_name.required' => "Student Name is Not Empty",
+        //     'student_email.required' => "Email Must be valid Mail",
+        //     'student_email.email' => "Email Must be valid Mail",
+        //     'designation.required' => "Designation is Not Empty",
+        //      'student_picture.required' => "Picture is Not Empty",
+        //     'student_phone.numeric' => "Only Number Allow",
 
 
-        ];
-        $this->validate($req,$rulse,$cm);
+        // ];
+        // $this->validate($req,$rulse,$cm);
 
         //With imgage && student info
-        if($req->HasFile('student_picture')){
-            $img = $req->file('student_picture');
-            $extension = $img->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $img->move('storage/student',$filename);
+//         if($req->HasFile('student_picture')){
+//             $img = $req->file('student_picture');
+//             $extension = $img->getClientOriginalExtension();
+//             $filename = time().'.'.$extension;
+//             $img->move('storage/student',$filename);
 
-            Student::insert([
-            'name' => $req->student_name,
+//             Student::create([
+//             'name' => $req->student_name,
+//             'email' =>$req->student_email,
+//             'designation' =>$req->designation,
+//             'phone' =>$req->student_phone,
+//             'std_picture' =>$filename,
+//             'gender' =>$req->sex,
+//             'status' => '0',
+//             ]);
+//              return redirect('admin/student/studentlist')->with('status',"Student Information Successfully Inserted...!!");
+//   //->back()->with('status',"Student Information Successfully Inserted...!!"
+//         }
+
+        //With out imgage only student info
+
+
+            Student::create([
+            'student_name' => $req->student_name,
             'email' =>$req->student_email,
             'designation' =>$req->designation,
             'phone' =>$req->student_phone,
-            'std_picture' =>$filename,
             'gender' =>$req->sex,
-            'created_at' =>carbon::now(),
-
-            ]);
-  return redirect('admin/student/studentlist');
-  //->back()->with('status',"Student Information Successfully Inserted...!!"
-        }
-
-        //With out imgage only student info
-        else{
-
-            Student::insert([
-            'name' =>$req->student_name,
-            'email' =>$req->student_email,
-            'password' =>$req->student_password,
-            'gender' =>$req->gender,
-            'phone' =>$req->student_phone,
-            'created_at' =>carbon::now(),
+            'status' => '0',
              ]);
 
-               return redirect('admin/student/studentlist')->with('status',"Student Information Successfully Inserted...!!");
-        }
+            return redirect('admin/student/studentlist')->with('status',"Student Information Successfully Inserted...!!");
+
 
 
 
     }
+
+
+
+
 
     /**
      * Display the specified resource.
@@ -150,21 +154,21 @@ class StudentController extends Controller
             $location ='storage/student/'.$student->std_picture;
                 // $img->move('storage/service/',$service_id);
             if ($student->std_picture) {
-               unlink($location);
-              // File::delete($location);
+                unlink($location);
+                // File::delete($location);
             }
 
-                       $img = $req->file('student_picture');
-                       $extension = $img->getClientOriginalExtension();
-                       $filename = time().'.'.$extension;
-                       $img->move('storage/student',$filename);
-                       Student::where('id',$std_id)->update([
-                        'name' =>$req->student_name,
-                        'email' =>$req->student_email,
-                        'std_picture' =>$filename,
-                        'updated_at' => Carbon::now()
-                        ]);
-                    }
+            $img = $req->file('student_picture');
+            $extension = $img->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $img->move('storage/student',$filename);
+            Student::where('id',$std_id)->update([
+            'name' =>$req->student_name,
+            'email' =>$req->student_email,
+            'std_picture' =>$filename,
+            'updated_at' => Carbon::now()
+            ]);
+            }
 
         else{
                         Student::where('id',$std_id)->update([

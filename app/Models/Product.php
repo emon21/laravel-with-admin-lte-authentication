@@ -13,10 +13,29 @@ class Product extends Model
     ];
 
     //Accsosor
-    public function getcreated_atAttribute($value)
-    {
-      //  return Str::title($value);
-        return Carbon::formate('d-m-Y')->$value;
+    // public function getImageAttribute($value)
+    // {
 
+    //     if($value == null){
+    //         return 'default.jpg';
+    //     }
+
+    // }
+
+    public function getCreatedAtAttribute($value)
+    {
+
+       return  date('d-m-Y', strtotime($value));
+
+
+    }
+
+    //Accessor
+
+
+    //Mutator
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = ucwords($value);
     }
 }

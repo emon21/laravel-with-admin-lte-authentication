@@ -22,20 +22,23 @@ class ProductFactory extends Factory
     public function definition()
     {
 
-        $title = $this->faker->title(50);
+      //  $title = $this->faker->unique()->title;
+        $title = $this->faker->title;
         $price = rand(10,500);
         $stock = rand(1,10);
         $gtotal = $price * $stock;
         $slug = Str::slug($title);
         return [
             //product
+
             'title' =>$title,
             'slug' =>$slug,
-            'image' =>$this->faker->name(10),
+            'image' =>'product/default.jpg',
             'price' => $price,
             'stock' =>$stock,
             'total' =>$gtotal,
             'status' =>$this->faker->numberBetween(0,1),
         ];
+
     }
 }
